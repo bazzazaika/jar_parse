@@ -7,16 +7,16 @@ from queue import Queue
 
 
 
-def fs():
+def fs(path_to_server):
     try:
-        os.chdir(var.path)#change initial dir
+        os.chdir(path_to_server)#change initial dir
     except:
         print("Unknow initial directory! Exit...")
         quit()
 
     queue_dir = Queue()#create queue for dir
     file_list = []
-    path = var.path
+    path = path_to_server
     dr = DIR(path,path)
     queue_dir.put(dr)
     jar_files=[]
