@@ -5,21 +5,11 @@ from classes import *
 import os
 from queue import Queue
 
-
-
-def fs(path_to_server):
-    try:
-        os.chdir(path_to_server)#change initial dir
-    except:
-        print("Unknow initial directory! Exit...")
-        quit()
-
-    queue_dir = Queue()#create queue for dir
+def fs_file_list(path):
     file_list = []
-    path = path_to_server
+    queue_dir = Queue()#create queue for dir
     dr = DIR(path,path)
     queue_dir.put(dr)
-    jar_files=[]
     while queue_dir.qsize()!=0:
         dr = queue_dir.get()
         path = dr.ret_path()
@@ -31,12 +21,23 @@ def fs(path_to_server):
             elif entry.is_dir():
                 dr = DIR(str(entry.name),path+'\\'+str(entry.name))
                 queue_dir.put(dr)
+    return file_list
 
-        for i in file_list:
-            if(i.endswith(".jar")):
-                jar_files.append(i)
-
+def fs(path_to_server):
+    try:
+        os.chdir(path_to_server)#change initial dir
+    except:
+        print("Unknow initial directory! Exit...")
+        quit()
+    path = path_to_server
+    file_list = fs_file_list(path)
+    jar_files=[]
+    
+    for i in file_list:
+        if(i.endswith(".jar")):
+            jar_files.append(i)
         file_list = []
+
     return jar_files
     '''
     for i in jar_files:

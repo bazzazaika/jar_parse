@@ -1,0 +1,6 @@
+getRuntime.exec
+FileWriter
+forward
+PrintWriter
+FileOutputStream
+InputStreamReader
