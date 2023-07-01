@@ -1,6 +1,8 @@
 from fs import *
 from decompile import *
 from del_com import *
+from dang_func import *
+
 import argparse
 
 
@@ -20,10 +22,11 @@ if __name__ == "__main__":
         quit()
 
     #list = fs(args.s) #list of jar file
-    #dec(args.dec, list)#decompile all jar files
+    #pt = dec(args.dec, list)#decompile all jar files
     if(args.comments != None):
         del_com()#deleting comments in *.java file
-    
+    pt = "E:\jar_parse\output\cfr_2023-06-30_16-51-37"
+    search_dang_func(args.dec, pt)
 
 
     

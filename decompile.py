@@ -41,5 +41,5 @@ def dec(mode, list):
     else:
         print("This decompiler is not supported ")
         quit()
-
+    return pt
 
