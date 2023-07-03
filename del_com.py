@@ -1,6 +1,5 @@
 import re
 from fs import *
-import var
 
 
 def comment_remover(text):
@@ -17,8 +16,8 @@ def comment_remover(text):
     return re.sub(pattern, replacer, text)
 
 
-def del_com():
-    list = fs_file_list(var.path_to_output)
+def del_com(path_to_output):
+    list = fs_file_list(path_to_output)
     mx = len(list)
     kol=0
     j = 1

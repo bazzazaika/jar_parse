@@ -1,10 +1,9 @@
-import var
 from fs import *
 import csv
 
-def search_dang_func(mode,pt):
+def search_dang_func(mode,pt,path_to_dang_func):
     dang_func = []
-    with open(var.path_to_dang_func,"r") as f:
+    with open(path_to_dang_func,"r") as f:
         for i in f.readlines():
             dang_func.append(i.replace("\n",""))
 
@@ -16,12 +15,12 @@ def search_dang_func(mode,pt):
     proz = 1
     kol = 0
 
-    with open(pt+'.csv', 'w', newline='') as f:
-        writer = csv.writer(f)
+    with open(pt+'.csv', 'w', newline='') as f_csv:
+        writer = csv.writer(f_csv)
         writer.writerow(['Path to jar-module', 'Java-class', 'Dangerous function'])
         for i in list:
-            with open(i, 'r') as f:
-                content = f.read()
+            with open(i, 'r') as f_java:
+                content = f_java.read()
                 '''
                 while content.find('import')!=-1:
                     start = content.find('import')
@@ -41,11 +40,6 @@ def search_dang_func(mode,pt):
                             name = parts[-1]
                             name = name.split('.')
                             name = name[0]
-                            '''
-                            if name == 'FilterBuilder':
-                                print()
-                            '''
-                            
                             h = ind
                             while(content[h]!=' '):#первое слово(class)
                                 h+=1
@@ -61,7 +55,14 @@ def search_dang_func(mode,pt):
                         flag = True
                         break
                 if flag:
-                    writer.writerow([i,classes_found,j])
+                    parts = i.split('\\')
+                    MAX = parts.index('output')
+                    pt_to_jar = ''
+                    for h in range(MAX+1+2):#+1 это само output, +2 остальные подкатологи до файла my_path
+                        pt_to_jar += parts[h]+'\\'
+                    with open(pt_to_jar+'my_path', 'r') as f_my_path:
+                        full_path = f_my_path.read().replace("\n","")
+                    writer.writerow([full_path,classes_found,j])
             kol+=1
             if(kol>=mx*0.1*proz):
                 proz+=1

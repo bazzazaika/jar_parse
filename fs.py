@@ -1,5 +1,4 @@
 #my
-import var
 from classes import *
 #python modules
 import os

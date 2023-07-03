@@ -1,5 +1,4 @@
 import os
-import var
 import datetime
 
 def create_dir(mode):
@@ -24,19 +23,19 @@ def nested_fold(pt,i):
     file.close()
     return new_pt
 
-def dec(mode, list):
+def dec(mode, ptd, list):
     if(mode == "cfr"):
         pt = create_dir(mode)
         for i in list:
             pt_nested_fold = nested_fold(pt,i)
             #print("java -jar "+var.path_to_decompilers+"cfr.jar \""+i+"\" --outputdir "+pt_nested_fold)
-            os.system("java -jar "+var.path_to_decompilers+"cfr.jar \""+i+"\" --outputdir "+pt_nested_fold)
+            os.system("java -jar "+ptd+"cfr.jar \""+i+"\" --outputdir "+pt_nested_fold)
     elif(mode == "procyon"):
         pt = create_dir(mode)
         for i in list:
             pt_nested_fold = nested_fold(pt,i)
             #print("java -jar "+var.path_to_decompilers+"procyon.jar \""+i+"\" -o "+pt_nested_fold)
-            os.system("java -jar "+var.path_to_decompilers+"procyon.jar \""+i+"\" -o "+pt_nested_fold)
+            os.system("java -jar "+ptd+"procyon.jar \""+i+"\" -o "+pt_nested_fold)
 
     else:
         print("This decompiler is not supported ")
